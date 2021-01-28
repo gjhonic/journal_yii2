@@ -3,8 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Journals';
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,7 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'journal_id',
-            'journal_short_title',
+
+            [
+                'attribute'=>'journal_img',
+                'label'=>'Изображения',
+                'format'=>'html',
+                'content'=>function($data){
+                    return  '<img src="'.$data->journal_img.'">';
+                },
+            ],
+
+            'journal_title',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Author;
 
 /**
  * JournalController implements the CRUD actions for Journal model.
@@ -65,6 +66,7 @@ class JournalController extends Controller
     public function actionCreate()
     {
         $model = new Journal();
+        $Authors = Author::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->journal_id]);
@@ -72,6 +74,7 @@ class JournalController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'Authors' => $Authors,
         ]);
     }
 
