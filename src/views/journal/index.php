@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Journal', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Journal', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -22,13 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'journal_id',
-            'journal_title',
             'journal_short_title',
-            'journal_img',
-            'journal_date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

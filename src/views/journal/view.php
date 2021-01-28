@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'journal_id',
             'journal_title',
-            'journal_short_title',
+            'journal_description',
             'journal_img',
             'journal_date',
         ],

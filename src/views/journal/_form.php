@@ -15,7 +15,7 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->field($model, 'journal_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'journal_short_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'journal_description')->textarea(['rows' => '6']) ?>
 
     <?= $form->field($model, 'journal_img')->textInput(['maxlength' => true]) ?>
 

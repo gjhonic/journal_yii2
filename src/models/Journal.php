@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $journal_id
  * @property string $journal_title
- * @property string $journal_short_title
+ * @property string $journal_description
  * @property string $journal_img
  * @property string $journal_date
  *
@@ -31,9 +31,10 @@ class Journal extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['journal_title', 'journal_short_title', 'journal_img', 'journal_date'], 'required'],
+            [['journal_title', 'journal_description', 'journal_img', 'journal_date'], 'required'],
             [['journal_date'], 'safe'],
-            [['journal_title', 'journal_short_title', 'journal_img'], 'string', 'max' => 255],
+            [['journal_description'], 'string'],
+            [['journal_title', 'journal_img'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,7 +46,7 @@ class Journal extends \yii\db\ActiveRecord
         return [
             'journal_id' => 'Journal ID',
             'journal_title' => 'Journal Title',
-            'journal_short_title' => 'Journal Short Title',
+            'journal_description' => 'Journal Description',
             'journal_img' => 'Journal Img',
             'journal_date' => 'Journal Date',
         ];
