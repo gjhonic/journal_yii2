@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: db
--- Время создания: Янв 28 2021 г., 14:21
+-- Время создания: Янв 28 2021 г., 14:37
 -- Версия сервера: 10.3.27-MariaDB-1:10.3.27+maria~focal
 -- Версия PHP: 7.4.14
 
@@ -33,6 +33,17 @@ CREATE TABLE `author` (
   `author_surname` varchar(255) NOT NULL,
   `author_patronymic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `author`
+--
+
+INSERT INTO `author` (`author_id`, `author_name`, `author_surname`, `author_patronymic`) VALUES
+(1, 'Иван', 'Иванов', 'Иванович'),
+(2, 'Петр', 'Петров', 'Петрович'),
+(3, 'Светлана', 'Дудко', 'Ираклиевна '),
+(4, 'Андриян', 'Железнов', 'Давыдович '),
+(5, 'Лаврентий', 'Фамусов', 'Никитевич ');
 
 -- --------------------------------------------------------
 
@@ -90,7 +101,7 @@ ALTER TABLE `journal`
 -- AUTO_INCREMENT для таблицы `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `author_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `author_journal`
