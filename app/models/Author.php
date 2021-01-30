@@ -69,14 +69,6 @@ class Author extends \yii\db\ActiveRecord
 
         return $query->all();
 
-    //   $sql= " SELECT journal.journal_title as journal_title, journal.journal_date as journal_date, journal.journal_id as journal_id
-    //             FROM author_journal
-    //             LEFT JOIN journal ON journal.journal_id = author_journal.journal_id
-    //             WHERE author_journal.author_id =".$this->author_id."
-    //             ORDER BY journal.journal_id DESC";
-    //     $connection=Yii::$app->db;
-    //     return $connection->createCommand($sql)->queryAll();
-
     }
 
     /**

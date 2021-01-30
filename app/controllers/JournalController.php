@@ -52,10 +52,13 @@ class JournalController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id) 
     {
+        $journal = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $journal,
+            'Authors' => $journal->getAuthors(),
         ]);
     }
 
@@ -89,40 +92,6 @@ class JournalController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Journal model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionSaveProcess()
-    {
-        $unit = Unit::findOne(Yii::$app->request->post('event_unit_id'));
-        $new_event = new KonusEvent();
-
-        $new_event->event_title       = Yii::$app->request->post('event_title');
-        $new_event->event_description = Yii::$app->request->post('event_description');
-        $new_event->event_type_id     = Yii::$app->request->post('event_type_id');
-        $new_event->event_value       = Yii::$app->request->post('event_value');
-        $new_event->event_unit_id     = Yii::$app->request->post('event_unit_id');
-        $new_event->event_date        = Yii::$app->request->post('event_date');
-
-
-        $model = new Journal();
-        $Authors = Author::find()->all();
-
-        foreach($Authors as $author){
-            if(($status = Yii::$app->request->post('tp_'.$author->author_id)) === 'on'){
-                $new_link = new AuthorJournal();
-                $new_link->author_id = $author->author_id;
-                $new_link->journal_id = $model->journal_id;
-                $new_link->save();
-                }
-        }
-
-        return $this->redirect(['view', 'id' => $model->journal_id]);
-        
-
-    }
 
     /**
      * Updates an existing Journal model.

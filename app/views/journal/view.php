@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Journal */
@@ -35,5 +36,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'journal_date',
         ],
     ]) ?>
+
+    <h2>Authors</h2>
+
+    <table class="table table-bordered">
+    <thead class="thead-default">
+        <tr>
+        <th>#</th>
+        <th>Author</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $i=0; ?>
+        <?php foreach($Authors as $author): $i++; ?>
+                <tr>
+                    <th scope="row"><?=$i?></th>
+                    <td><?=$author['author_surname']." ".$author['author_name']." ".$author['author_patronymic'] ?></td>
+                    <td><a href="<?=Url::to(['author/view', 'id'=> $author['author_id']])?>" class="btn btn-primary">Перейти</a></td>
+                </tr>
+        <?php endforeach ?>
+    </tbody>
+    </table>
 
 </div>

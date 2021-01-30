@@ -34,29 +34,28 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-
     <h2>Jornals</h2>
 
-    <table class="table">
-  <thead class="thead-default">
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-   <?php $i=0; ?>
-   <?php foreach($Jornals as $journal): $i++; ?>
+    <table class="table table-bordered">
+    <thead class="thead-default">
         <tr>
-            <th scope="row"><?=$i?></th>
-            <td><?=$journal['journal_title']?></td>
-            <td><?=$journal['journal_date']?></td>
-            <td><a href="<?=Url::to(['journal/view/'.$journal['journal_id']])?>" class="btn btn-primary">Подробнее...</a></td>
+        <th>#</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th></th>
         </tr>
-    <?php endforeach ?>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+        <?php $i=0; ?>
+        <?php foreach($Jornals as $journal): $i++; ?>
+                <tr>
+                    <th scope="row"><?=$i?></th>
+                    <td><?=$journal['journal_title']?></td>
+                    <td><?=$journal['journal_date']?></td>
+                    <td><a href="<?=Url::to(['journal/view', 'id'=> $journal['journal_id']])?>" class="btn btn-primary">Подробнее...</a></td>
+                </tr>
+        <?php endforeach ?>
+    </tbody>
+    </table>
 
 </div>
