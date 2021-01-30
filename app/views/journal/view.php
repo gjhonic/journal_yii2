@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Journal */
 
-$this->title = $model->journal_id;
+$this->title = $model->journal_title;
 $this->params['breadcrumbs'][] = ['label' => 'Journals', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'journal_id',
             'journal_title',
             'journal_description',
             'journal_img',

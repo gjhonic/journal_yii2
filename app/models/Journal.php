@@ -32,9 +32,8 @@ class Journal extends \yii\db\ActiveRecord
     {
         return [
             [['journal_title', 'journal_description', 'journal_img', 'journal_date'], 'required'],
-            [['journal_date'], 'safe'],
             [['journal_description'], 'string'],
-            [['journal_title', 'journal_img'], 'string', 'max' => 255],
+            [['journal_title', 'journal_img', 'journal_date'], 'string', 'max' => 255],
         ];
     }
 

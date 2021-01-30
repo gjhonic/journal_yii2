@@ -13,14 +13,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-	<?php $form = ActiveForm::begin(['id' => 'login-form','action'=> 'journal/save']); ?>
+	<?php $form = ActiveForm::begin(['id' => 'login-form','action'=> 'create']); ?>
+
+    <?= $form->field($model, 'journal_title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'journal_description')->textarea(['rows' => '6']) ?>
+
+    <?= $form->field($model, 'journal_img')->textInput(['maxlength' => true]) ?>
+
+    <?php
+    if($model->journal_date) {
+        $model->journal_date = date("d.m.Y", (integer) $model->journal_date);
+    }
+    echo $form->field($model, 'journal_date')->widget(DateTimePicker::className(),[
+        'name' => 'dp_1',
+        'type' => DateTimePicker::TYPE_INPUT,
+        'options' => ['placeholder' => 'Ввод даты/времени...'],
+        'convertFormat' => true,
+        'value'=> date("d.m.Y",(integer) $model->journal_date),
+        'pluginOptions' => [
+            'format' => 'dd.MM.yyyy',
+            'autoclose'=>true,
+            'weekStart'=>1, //неделя начинается с понедельника
+            'startDate' => '01.05.2015', //самая ранняя возможная дата
+            'todayBtn'=>true, //снизу кнопка "сегодня"
+        ]
+    ]); ?>
 
 	<div class="form-group">
-		<label for="journal_title">Title journal</label>
-		<input type="text" class="form-control" id="journal_title" placeholder="" name="journal_title" required>
-	</div>
-
-	<input type="submit" value="Сохранить" class="btn btn-success">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
 	<h2>Authors:</h2>
 	<p style="color:grey">Mark the authors</p>
