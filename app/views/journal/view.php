@@ -32,7 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'journal_title',
             'journal_description',
-            'journal_img',
+            [
+                'attribute'=>'journal_img',
+                'label' => 'Изображение',
+                'format' => 'raw',
+                'value'=> '<img src="http://localhost:8080/images_journal/1.jpeg">',
+    
+            ],
+    
             'journal_date',
         ],
     ]) ?>

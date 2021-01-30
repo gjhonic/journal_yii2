@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Journal;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+
+use app\models\Journal;
 use app\models\Author;
 use app\models\AuthorJournal;
 
@@ -73,17 +75,21 @@ class JournalController extends Controller
         $model = new Journal();
         $Authors = Author::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            foreach($Authors as $author){
-                if(($status = Yii::$app->request->post('tp_'.$author->author_id)) === 'on'){
-                    $new_link = new AuthorJournal();
-                    $new_link->author_id = $author->author_id;
-                    $new_link->journal_id = $model->journal_id;
-                    $new_link->save();
-                  }
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            
+            if($model->saveJournal() ){
+                foreach($Authors as $author){
+                    if(($status = Yii::$app->request->post('tp_'.$author->author_id)) === 'on'){
+                        $new_link = new AuthorJournal();
+                        $new_link->author_id = $author->author_id;
+                        $new_link->journal_id = $model->journal_id;
+                        $new_link->save();
+                      }
+                }
+                return $this->redirect(['view', 'id' => $model->journal_id]);
             }
-
-            return $this->redirect(['view', 'id' => $model->journal_id]);
+            
         }
 
         return $this->render('create', [

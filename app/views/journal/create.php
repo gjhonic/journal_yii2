@@ -13,13 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-	<?php $form = ActiveForm::begin(['id' => 'login-form','action'=> 'create','options' => ['enctype' => 'multipart/form-data']]); ?>
+	<?php $form = ActiveForm::begin(['id' => 'login-form','action'=> 'create']); ?>
 
     <?= $form->field($model, 'journal_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'journal_description')->textarea(['rows' => '6']) ?>
 
 	<?= $form->field($model, 'image')->fileInput() ?>
+
 
     <?php
     if($model->journal_date) {

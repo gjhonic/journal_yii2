@@ -18,6 +18,8 @@ use yii\web\UploadedFile;
  */
 class Journal extends \yii\db\ActiveRecord
 {
+    public $image;
+
     /**
      * {@inheritdoc}
      */
@@ -25,8 +27,6 @@ class Journal extends \yii\db\ActiveRecord
     {
         return 'journal';
     }
-
-    public $image;
 
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class Journal extends \yii\db\ActiveRecord
             [['journal_title', 'journal_description', 'journal_date'], 'required'],
             [['journal_description'], 'string'],
             [['journal_title', 'journal_img', 'journal_date'], 'string', 'max' => 255],
-            [['image'], 'file', 'extensions' => 'png, jpg'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxSize' => 2*(1024*1024)],
         ];
     }
 
@@ -77,6 +77,21 @@ class Journal extends \yii\db\ActiveRecord
 
     }
 
+    public function saveJournal()
+    {
+        $this->journal_img = "url";
+        if($this->save()){
+            $this->journal_img = "localhost:8080/images_journal/".$this->journal_id.".".$this->image->extension;
+            $this->update();
+
+            $this->image->saveAs("localhost:8080/images_journal/{$this->journal_id}.{$this->image->extension}");
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
     /**
      * Gets query for [[AuthorJournals]].
      *
@@ -85,13 +100,5 @@ class Journal extends \yii\db\ActiveRecord
     public function getAuthorJournals()
     {
         return $this->hasMany(AuthorJournal::className(), ['journal_id' => 'journal_id']);
-    }
-
-    public function upload(){
-        if($this->validate()){
-            var_dump($this->image);
-        }else{
-            return false;
-        }
     }
 }
