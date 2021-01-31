@@ -17,8 +17,6 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->field($model, 'journal_description')->textarea(['rows' => '6']) ?>
 
-    <?= $form->field($model, 'journal_img')->textInput(['maxlength' => true]) ?>
-
     <?php
     if($model->journal_date) {
         $model->journal_date = date("d.m.Y", (integer) $model->journal_date);

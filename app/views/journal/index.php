@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Изображения',
                 'format'=>'html',
                 'content'=>function($data){
-                    return  '<img src="'.$data->journal_img.'">';
+                    return  '<img src="../'.$data->journal_img.'" width="190px" height="300px">';
                 },
             ],
 

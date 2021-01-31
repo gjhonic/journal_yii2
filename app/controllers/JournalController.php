@@ -109,13 +109,25 @@ class JournalController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $Authors = Author::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+            $model->resetWtiters();
+
+            foreach($Authors as $author){
+                if(($status = Yii::$app->request->post('tp_'.$author->author_id)) === 'on'){
+                    $new_link = new AuthorJournal();
+                    $new_link->author_id = $author->author_id;
+                    $new_link->journal_id = $model->journal_id;
+                    $new_link->save();
+                  }
+            }
             return $this->redirect(['view', 'id' => $model->journal_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'Authors' => $Authors,
         ]);
     }
 

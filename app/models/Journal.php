@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use app\models\AuthorJournal;
 
 /**
  * This is the model class for table "journal".
@@ -74,7 +75,13 @@ class Journal extends \yii\db\ActiveRecord
         ]);
 
         return $query->all();
+    }
 
+    public function resetWtiters(){
+        $Writers = AuthorJournal::find()->where(['journal_id'=>$this->journal_id])->all();
+        foreach($Writers as $writer){
+            $writer->delete();
+        }
     }
 
     public function saveJournal()

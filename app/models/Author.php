@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\Journal;
+use app\models\AuthorJournal;
 
 /**
  * This is the model class for table "author".
@@ -68,7 +69,10 @@ class Author extends \yii\db\ActiveRecord
         ]);
 
         return $query->all();
+    }
 
+    public function isWriterJournal($journal_id){
+        return (AuthorJournal::find()->where(['author_id'=>$this->author_id, 'journal_id'=>$journal_id])->count() == 1 ) ? true : false;
     }
 
     /**
