@@ -31,15 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'journal_title',
-            'journal_description',
             [
                 'attribute'=>'journal_img',
-                'label' => 'Изображение',
-                'format' => 'raw',
-                'value'=> '<img src="http://localhost:8080/images_journal/1.jpeg">',
+                'label' => 'Image',
+                'format' => ['image', ['width' => '190', 'height'=>'300']],
+                'value'=> '../'.$model->journal_img
     
             ],
-    
+            'journal_description',
             'journal_date',
         ],
     ]) ?>

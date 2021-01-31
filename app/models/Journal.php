@@ -81,10 +81,10 @@ class Journal extends \yii\db\ActiveRecord
     {
         $this->journal_img = "url";
         if($this->save()){
-            $this->journal_img = "localhost:8080/images_journal/".$this->journal_id.".".$this->image->extension;
+            $this->journal_img = "uploads/images_journal/".$this->journal_id.".".$this->image->extension;
             $this->update();
 
-            $this->image->saveAs("localhost:8080/images_journal/{$this->journal_id}.{$this->image->extension}");
+            $this->image->saveAs("uploads/images_journal/{$this->journal_id}.{$this->image->extension}");
             return true;
         }else{
             return false;
